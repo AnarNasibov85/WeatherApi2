@@ -24,6 +24,19 @@ function displayWeatherInfo(weatherData) {
                 <h4>Tempratur: ${Math.round(weatherData.main.temp)}°C</h4>
                 <h5>Havanin Veziyyeti: ${weatherData.weather[0].description}</h5>
                 <p>Koordinatlar: ${weatherData.coord.lat}, ${weatherData.coord.lon}</p>
+                   
             `;
     document.getElementById('weather-info').innerHTML = weatherInfo;
+}
+function showCurrentCoordinates() {
+    navigator.geolocation.getCurrentPosition(function(position) {
+        const lat = position.coords.latitude;
+        const lon = position.coords.longitude;
+
+        const coordinates = document.getElementById('coordinates');
+        coordinates.innerText = `${lat}, ${lon}`;
+    }, function(error) {
+        console.error('xeta:', error);
+        alert('kordinat bilgileri gorunmedi.');
+    });
 }
